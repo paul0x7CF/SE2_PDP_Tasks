@@ -6,7 +6,8 @@
         <!-- This appender defines stdout as its target -->
         <Console name="ConsoleAppender" target="SYSTEM_OUT">
             <PatternLayout disableAnsi="false">
-                <pattern>%d{HH:mm:ss.SSS} [%t] %highlight{%level}{FATAL=bg_red, ERROR=red, WARN=yellow, INFO=green, DEBUG=blue, TRACE=magenta} %logger{36} - %msg%n%throwable</pattern>
+                <pattern>%d{HH:mm:ss.SSS} [%t] %highlight{%level}{FATAL=bg_red, ERROR=red, WARN=yellow, INFO=green, DEBUG=blue, TRACE=magenta} %logger{1} - %msg%n%throwable</pattern>
+                <!--%logger{x} outputs the path x specifies the path depth e.g x=1 Main x=3 org.example.Main -->
             </PatternLayout>
         </Console>
         <!-- This appender defines a pattern for a file name to log to a file -->
