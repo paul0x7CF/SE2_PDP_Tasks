@@ -2,12 +2,6 @@ plugins {
     id("java")
 }
 
-java {
-    toolchain {
-        languageVersion.set(JavaLanguageVersion.of(21))
-    }
-}
-
 group = "org.example"
 version = "1.0-SNAPSHOT"
 
@@ -15,6 +9,11 @@ repositories {
     mavenCentral()
 }
 
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(21))
+    }
+}
 
 dependencies {
     implementation("org.apache.logging.log4j:log4j-api:2.20.0")
