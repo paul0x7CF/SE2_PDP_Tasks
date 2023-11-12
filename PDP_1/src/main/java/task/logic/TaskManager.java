@@ -11,13 +11,13 @@ import task.exceptions.TaskNotFoundException;
 import java.time.LocalDate;
 import java.util.HashMap;
 
-public class TaskManger {
+public class TaskManager {
 
-    private static final Logger logger = LogManager.getLogger(TaskManger.class);
+    private static final Logger logger = LogManager.getLogger(TaskManager.class);
 
     private HashMap<Integer, Task> taskList;
 
-    public TaskManger() {
+    public TaskManager() {
         this.taskList = new HashMap<>();
     }
 

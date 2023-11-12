@@ -1,10 +1,10 @@
-package org.example;
+package task.main;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import task.data.ETaskStatus;
 import task.exceptions.InvalidDueDateException;
-import task.logic.TaskManger;
+import task.logic.TaskManager;
 import task.validation.ValidationHandler;
 
 import java.time.LocalDate;
@@ -17,7 +17,7 @@ public class Main {
         logger.debug("Hallo");
         System.out.println("Welcome by the Task Manager App");
         Scanner scanner = new Scanner(System.in);
-        TaskManger myTaskManager = new TaskManger();
+        TaskManager myTaskManager = new TaskManager();
 
         while (true) {
             System.out.println();
