@@ -2,7 +2,8 @@ package org.example;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import task.exceptions.InvalidUserInputException;
+import task.data.ETaskStatus;
+import task.exceptions.InvalidDueDateException;
 import task.logic.TaskManger;
 import task.validation.ValidationHandler;
 
@@ -18,14 +19,14 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         TaskManger myTaskManager = new TaskManger();
 
-        System.out.println("Please choose one of the following options:");
-        System.out.println("1. Create a new task");
-        System.out.println("2. Update a task");
-        System.out.println("3. Delete a task");
-        System.out.println("4. Search for a task");
-        System.out.println("5. Exit the application");
-
         while (true) {
+            System.out.println();
+            System.out.println("Please choose one of the following options:");
+            System.out.println("1. Create a new task");
+            System.out.println("2. Update a task");
+            System.out.println("3. Delete a task");
+            System.out.println("4. Search for a task");
+            System.out.println("5. Exit the application");
 
             int userChoice = 0;
             boolean isChoiceInValid;
@@ -81,6 +82,80 @@ public class Main {
                         System.out.println("There are no tasks saved, please create a new task first");
                         break;
                     }
+                    int task_ID = 0;
+                    System.out.print("Please enter the task name you want to update: ");
+                    String selectedTaskName = scanner.nextLine();
+                    try {
+                        ValidationHandler.validateUserInput(selectedTaskName);
+                        task_ID = myTaskManager.searchTask(selectedTaskName);
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+                    System.out.println("Do you want to update the following task?");
+                    System.out.println(myTaskManager.getTaskByID(task_ID));
+                    System.out.print("[y/n]: ");
+                    String userConfirmation = scanner.nextLine();
+                    if (userConfirmation.equals("n"))
+                        break;
+
+
+                    System.out.println("Please choose one of the following options:");
+                    System.out.println("1. Update task name");
+                    System.out.println("2. Update task description");
+                    System.out.println("3. Update task due date");
+                    System.out.println("4. Update task status");
+                    System.out.print("Please enter your choice: ");
+                    int userUpdateChoice = scanner.nextInt();
+                    scanner.nextLine();
+                    switch (userUpdateChoice) {
+                        case 1 -> {
+                            System.out.print("Please enter the new task name: ");
+                            String newTaskName = scanner.nextLine();
+                            try {
+                                ValidationHandler.validateUserInput(newTaskName);
+                                myTaskManager.updateTaskName(task_ID, newTaskName);
+                            } catch (Exception e) {
+                                System.out.println(e.getMessage());
+                            }
+                        }
+                        case 2 -> {
+                            System.out.print("Please enter the new task description: ");
+                            String newTaskDescription = scanner.nextLine();
+                            try {
+                                ValidationHandler.validateUserInput(newTaskDescription);
+                                myTaskManager.updateTaskDescription(task_ID, newTaskDescription);
+                            } catch (Exception e) {
+                                throw new RuntimeException(e);
+                            }
+
+
+                        }
+                        case 3 -> {
+                            System.out.print("Please enter the new task due date: ");
+                            LocalDate newTaskDueDate = LocalDate.parse(scanner.nextLine());
+                            try {
+                                myTaskManager.updateTaskDueDate(task_ID, newTaskDueDate);
+                            } catch (InvalidDueDateException e) {
+                                System.out.println(e.getMessage());
+                            }
+
+                        }
+                        case 4 -> {
+                            System.out.println("Please choose one of the following options:");
+                            System.out.println("1. Open");
+                            System.out.println("2. In Progress");
+                            System.out.println("3. Done");
+                            System.out.print("Please enter your choice: ");
+                            int userStatusChoice = scanner.nextInt();
+                            scanner.nextLine();
+                            switch (userStatusChoice) {
+                                case 1 -> myTaskManager.updateTaskStatus(task_ID, ETaskStatus.OPEN);
+                                case 2 -> myTaskManager.updateTaskStatus(task_ID, ETaskStatus.IN_PROGRESS);
+                                case 3 -> myTaskManager.updateTaskStatus(task_ID, ETaskStatus.DONE);
+                            }
+
+                        }
+                    }
                 }
                 case 3 -> {
                     logger.info("User chose to delete a task");
@@ -88,6 +163,23 @@ public class Main {
                         System.out.println("There are no tasks saved, please create a new task first");
                         break;
                     }
+                    int task_ID = 0;
+                    System.out.print("Please enter the task name you want to delete: ");
+                    String selectedTaskName = scanner.nextLine();
+                    try {
+                        ValidationHandler.validateUserInput(selectedTaskName);
+                        task_ID = myTaskManager.searchTask(selectedTaskName);
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+                    System.out.println("Do you want to delete the following task?");
+                    System.out.println(myTaskManager.getTaskByID(task_ID));
+                    System.out.print("[y/n]: ");
+                    String userConfirmation = scanner.nextLine();
+                    if (userConfirmation.equals("n"))
+                        break;
+
+                    myTaskManager.deleteTask(task_ID);
 
                 }
                 case 4 -> {
@@ -96,6 +188,17 @@ public class Main {
                         System.out.println("There are no tasks saved, please create a new task first");
                         break;
                     }
+                    int task_ID = 0;
+                    System.out.print("Please enter the task name you want to search: ");
+                    String selectedTaskName = scanner.nextLine();
+                    try {
+                        ValidationHandler.validateUserInput(selectedTaskName);
+                        task_ID = myTaskManager.searchTask(selectedTaskName);
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+                    System.out.println("Following task was found:");
+                    System.out.println(myTaskManager.getTaskByID(task_ID));
 
                 }
                 case 5 -> {
@@ -106,6 +209,9 @@ public class Main {
             }
 
 
+
+
         }
+
     }
 }

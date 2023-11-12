@@ -62,10 +62,12 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Task ID: " + TASK_ID +
+        return "------------------------"+
+                "\nTask ID: " + TASK_ID +
                 "\nTask Name: " + taskName +
                 "\nDescription: " + description +
                 "\nStatus: " + status.toString() +
-                "\nDue Date: " + dueDate;
+                "\nDue Date: " + dueDate+
+                "\n------------------------";
     }
 }

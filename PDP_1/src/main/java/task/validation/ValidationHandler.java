@@ -44,7 +44,7 @@ public class ValidationHandler {
 
     // Validate input for SQL injection prevention
     public static void validateUserInput(String input) throws InvalidUserInputException {
-        logger.debug("Validating following user input: {}", input);
+        logger.trace("Validating following user input: {}", input);
         if(Pattern.matches("^[a-zA-Z0-9\\s]+$", input)) {
             logger.debug("User Input is valid");
         }

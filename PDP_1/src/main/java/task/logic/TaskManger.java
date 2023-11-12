@@ -29,26 +29,35 @@ public class TaskManger {
 
     public void updateTaskName(int taskID, String taskName) throws InvalidTextInputValidation {
         this.taskList.get(taskID).setTaskName(taskName);
+        logger.info("Task name updated to {} for task ID {}", taskName, taskID);
     }
 
     public void updateTaskDescription(int taskID, String description) throws InvalidTextInputValidation {
         this.taskList.get(taskID).setDescription(description);
+        logger.info("Task description updated to {} for task ID {}", description, taskID);
     }
 
     public void updateTaskDueDate(int taskID, LocalDate dueDate) throws InvalidDueDateException {
         this.taskList.get(taskID).setDueDate(dueDate);
+        logger.info("Task due date updated to {} for task ID {}", dueDate, taskID);
     }
 
     public void updateTaskStatus(int taskID, ETaskStatus status) {
         this.taskList.get(taskID).setStatus(status);
+        logger.info("Task status updated to {} for task ID {}", status, taskID);
     }
 
     public void deleteTask(int taskID) {
         this.taskList.remove(taskID);
+        logger.info("Task with task ID {} deleted", taskID);
     }
 
     public int getSavedTaskQuantity() {
         return this.taskList.size();
+    }
+
+    public Task getTaskByID(int taskID) {
+        return this.taskList.get(taskID);
     }
 
     public int searchTask(String taskName) throws TaskNotFoundException {
@@ -59,9 +68,10 @@ public class TaskManger {
             }
         }
         logger.debug("No exact match found trying to find similar task name");
-        if(searchTaskWithTypo(taskName) != -1) {
+        int similarTaskID = searchTaskWithTypo(taskName);
+        if(similarTaskID != -1) {
             logger.debug("Similar task name found");
-            return searchTaskWithTypo(taskName);
+            return similarTaskID;
         }
         throw new TaskNotFoundException("Task not found");
     }
@@ -82,7 +92,7 @@ public class TaskManger {
     }
 
     private boolean hasSimilarName(String str1, String str2) {
-        final int TOLERANCE = 2;
+        final int TOLERANCE = 3;
         int distance = SearchAlgorithm.calculateLevenshteinDistance(str1, str2);
         logger.debug("Distance between {} and {} is {}", str1, str2, distance);
         return distance <= TOLERANCE;
