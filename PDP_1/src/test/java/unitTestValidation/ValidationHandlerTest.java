@@ -2,6 +2,7 @@ package unitTestValidation;
 
 import org.junit.jupiter.api.Test;
 import task.exceptions.InvalidTextInputValidation;
+import task.exceptions.InvalidUserInputException;
 import task.validation.ValidationHandler;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -35,5 +36,14 @@ public class ValidationHandlerTest {
         String fieldName = "Test Field";
 
         assertThrows(InvalidTextInputValidation.class, () -> ValidationHandler.validateTaskStringInput(input, fieldName, MAX_TEXT_LENGTH));
+    }
+
+    @Test
+    void validateUserInput_InvalidInputWithSQLInjection_SelectStatement_ThrowsInvalidUserInputException() {
+        // Arrange
+        String invalidInputWithSQLInjection = "SELECT * FROM users WHERE '1'='1'; --";
+
+        // Act and Assert
+        assertThrows(InvalidUserInputException.class, () -> ValidationHandler.validateUserInput(invalidInputWithSQLInjection));
     }
 }
