@@ -14,7 +14,6 @@ public class Main {
     private static final Logger logger = LogManager.getLogger(Main.class);
 
     public static void main(String[] args) {
-        logger.debug("Hallo");
         System.out.println("Welcome by the Task Manager App");
         Scanner scanner = new Scanner(System.in);
         TaskManager myTaskManager = new TaskManager();

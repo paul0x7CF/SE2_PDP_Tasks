@@ -22,6 +22,22 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter")
 }
 
+tasks.jar {
+    manifest {
+        attributes["Main-Class"] = "task.main.Main"
+    }
+    from(sourceSets.main.get().output)
+    // Include dependencies in the JAR file
+    dependsOn(configurations.runtimeClasspath)
+    from({
+        configurations.runtimeClasspath.get().filter { it.name.endsWith("jar") }.map { zipTree(it) }
+    })
+
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+
+
 tasks.test {
     useJUnitPlatform()
 }
