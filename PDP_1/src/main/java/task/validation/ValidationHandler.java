@@ -17,7 +17,6 @@ public class ValidationHandler {
 
 
     public static String validateTaskStringInput(String input, String fieldName, final int MAX_TEXT_LENGTH) throws InvalidTextInputValidation {
-        input = input.trim();
         List<ITaskStringInputValidation> stringInputValidations = Stream.of(
                 new ValidateTextInput(),
                 new ValidateTextLength(MAX_TEXT_LENGTH)
@@ -26,7 +25,7 @@ public class ValidationHandler {
         for (ITaskStringInputValidation eachValidation : stringInputValidations) {
             eachValidation.validateTaskStringInput(input, fieldName);
         }
-        return input;
+        return input.trim();
     }
 
 
