@@ -4,9 +4,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import task.exceptions.InvalidDueDateException;
 import task.exceptions.InvalidTextInputValidation;
+import task.exceptions.InvalidUserInputException;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 public class ValidationHandler {
@@ -38,5 +40,14 @@ public class ValidationHandler {
         }
         logger.debug("Due date is valid");
         return dueDate;
+    }
+
+    // Validate input for SQL injection prevention
+    public static void validateUserInput(String input) throws InvalidUserInputException {
+        logger.debug("Validating following user input: {}", input);
+        if(Pattern.matches("^[a-zA-Z0-9\\s]+$", input)) {
+            logger.debug("User Input is valid");
+        }
+        else throw new InvalidUserInputException("Input is invalid and contains special characters");
     }
 }

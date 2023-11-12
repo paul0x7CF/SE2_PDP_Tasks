@@ -13,6 +13,6 @@ public class ValidateTextInput implements ITaskStringInputValidation{
         if (input == null || input.isEmpty()) {
             throw new InvalidTextInputValidation(fieldName + " should not be null or empty");
         }
-        logger.debug("Input is present");
+        logger.debug("Input from {} is present", fieldName);
     }
 }

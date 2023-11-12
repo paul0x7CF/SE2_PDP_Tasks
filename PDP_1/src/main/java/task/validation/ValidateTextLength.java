@@ -19,6 +19,6 @@ public class ValidateTextLength implements ITaskStringInputValidation{
         if (input.length() > MAX_TEXT_LENGTH) {
             throw new InvalidTextInputValidation(fieldName + " should not be more than " + MAX_TEXT_LENGTH + " characters");
         }
-        logger.debug("Input is within the characters limit");
+        logger.debug("Input from {} is within the characters limit", fieldName);
     }
 }
