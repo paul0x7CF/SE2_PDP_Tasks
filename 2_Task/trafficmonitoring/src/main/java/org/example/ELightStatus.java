@@ -1,5 +1,5 @@
 package org.example;
 
-public enum LightStatus {
+public enum ELightStatus {
     RED, ORANGE, GREEN
 }

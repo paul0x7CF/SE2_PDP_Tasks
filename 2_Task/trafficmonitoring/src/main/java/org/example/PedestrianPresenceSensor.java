@@ -9,7 +9,7 @@ public class PedestrianPresenceSensor extends Device {
 
     public void setPedestrianPresent(boolean presence) {
         pedestrianPresent = presence;
-        System.out.println("Pedestrian presence status: " + presence + " (Device: " + getName() + ")");
+        notifyObservers("Pedestrian presence status: " + presence + " (Device: " + getName() + ")");
     }
 
     public boolean isPedestrianPresent() {

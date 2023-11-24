@@ -1,18 +1,18 @@
 package org.example;
 
 class TrafficLightSensorActuator extends Device {
-    private LightStatus lightStatus = LightStatus.RED;
+    private ELightStatus lightStatus = ELightStatus.RED;
 
     public TrafficLightSensorActuator(String name) {
         super(name);
     }
 
-    public void setLightStatus(LightStatus status) {
+    public void setLightStatus(ELightStatus status) {
         lightStatus = status;
-        System.out.println("Traffic light status changed: " + status + " (Device: " + getName() + ")");
+        notifyObservers("Traffic light status changed: " + status + " (Device: " + getName() + ")");
     }
 
-    public LightStatus getLightStatus() {
+    public ELightStatus getLightStatus() {
         return lightStatus;
     }
 }

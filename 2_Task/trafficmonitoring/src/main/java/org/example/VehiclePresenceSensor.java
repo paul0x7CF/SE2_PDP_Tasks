@@ -13,6 +13,6 @@ public class VehiclePresenceSensor extends Device {
 
     public void setVehiclePresent(boolean presence) {
         vehiclePresent = presence;
-        System.out.println("Vehicle presence detected: " + presence + " (Device: " + getName() + ")");
+        notifyObservers("Vehicle presence detected: " + presence + " (Device: " + getName() + ")");
     }
 }

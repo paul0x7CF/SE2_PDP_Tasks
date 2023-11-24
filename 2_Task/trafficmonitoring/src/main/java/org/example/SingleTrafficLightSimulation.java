@@ -20,25 +20,25 @@ public class SingleTrafficLightSimulation {
     TrafficLightSensorActuator pedestrianTrafficLight2 = new TrafficLightSensorActuator("Traffic Light Pedestrians 2");
 
     public void switchToVehicleTraffic() {
-        pedestrianTrafficLight1.setLightStatus(LightStatus.RED);
-        pedestrianTrafficLight2.setLightStatus(LightStatus.RED);
+        pedestrianTrafficLight1.setLightStatus(ELightStatus.RED);
+        pedestrianTrafficLight2.setLightStatus(ELightStatus.RED);
 
-        vehicleTrafficLightLeftLane.setLightStatus(LightStatus.ORANGE);
-        vehicleTrafficLightRightLane.setLightStatus(LightStatus.ORANGE);
+        vehicleTrafficLightLeftLane.setLightStatus(ELightStatus.ORANGE);
+        vehicleTrafficLightRightLane.setLightStatus(ELightStatus.ORANGE);
 
-        vehicleTrafficLightLeftLane.setLightStatus(LightStatus.GREEN);
-        vehicleTrafficLightRightLane.setLightStatus(LightStatus.GREEN);
+        vehicleTrafficLightLeftLane.setLightStatus(ELightStatus.GREEN);
+        vehicleTrafficLightRightLane.setLightStatus(ELightStatus.GREEN);
     }
 
     public void switchToPedestrianTraffic() {
-        vehicleTrafficLightLeftLane.setLightStatus(LightStatus.ORANGE);
-        vehicleTrafficLightRightLane.setLightStatus(LightStatus.ORANGE);
+        vehicleTrafficLightLeftLane.setLightStatus(ELightStatus.ORANGE);
+        vehicleTrafficLightRightLane.setLightStatus(ELightStatus.ORANGE);
 
-        vehicleTrafficLightLeftLane.setLightStatus(LightStatus.RED);
-        vehicleTrafficLightRightLane.setLightStatus(LightStatus.RED);
+        vehicleTrafficLightLeftLane.setLightStatus(ELightStatus.RED);
+        vehicleTrafficLightRightLane.setLightStatus(ELightStatus.RED);
 
-        pedestrianTrafficLight1.setLightStatus(LightStatus.GREEN);
-        pedestrianTrafficLight2.setLightStatus(LightStatus.GREEN);
+        pedestrianTrafficLight1.setLightStatus(ELightStatus.GREEN);
+        pedestrianTrafficLight2.setLightStatus(ELightStatus.GREEN);
     }
 
     public void simulate(int steps) {
