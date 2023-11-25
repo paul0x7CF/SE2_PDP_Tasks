@@ -1,4 +1,4 @@
-package org.example;
+package org.example.devices;
 
 public class PedestrianPresenceSensor extends Device {
     private boolean pedestrianPresent = false;

@@ -1,6 +1,12 @@
-package org.example;
+package org.example.strategy;
 
-public class SingleTrafficLightSimulation {
+import org.example.devices.ELightStatus;
+import org.example.devices.PedestrianPresenceSensor;
+import org.example.devices.TrafficLightSensorActuator;
+import org.example.devices.VehiclePresenceSensor;
+
+public class SingleTrafficLight implements ISimulationStrategy{
+
     static final int VEHICLE_TRAFFIC = 0;
     static final int PEDESTRIAN_TRAFFIC = 1;
     static final int VEHICLE_WAITING = 2;
@@ -10,7 +16,6 @@ public class SingleTrafficLightSimulation {
     String[] simulationStateNames = {"Vehicle Traffic", "Pedestrian Traffic", "Vehicle Waiting",
             "Pedestrian Waiting"};
 
-
     PedestrianPresenceSensor pedestrianSensor = new PedestrianPresenceSensor("Pedestrian Present");
     VehiclePresenceSensor vehiclePresenceSensorLeftLane = new VehiclePresenceSensor("Left Lane Vehicle Present");
     VehiclePresenceSensor vehiclePresenceSensorRightLane = new VehiclePresenceSensor("Right Lane Vehicle Present");
@@ -19,7 +24,7 @@ public class SingleTrafficLightSimulation {
     TrafficLightSensorActuator pedestrianTrafficLight1 = new TrafficLightSensorActuator("Traffic Light Pedestrians 1");
     TrafficLightSensorActuator pedestrianTrafficLight2 = new TrafficLightSensorActuator("Traffic Light Pedestrians 2");
 
-    public void switchToVehicleTraffic() {
+    private void switchToVehicleTraffic() {
         pedestrianTrafficLight1.setLightStatus(ELightStatus.RED);
         pedestrianTrafficLight2.setLightStatus(ELightStatus.RED);
 
@@ -30,7 +35,7 @@ public class SingleTrafficLightSimulation {
         vehicleTrafficLightRightLane.setLightStatus(ELightStatus.GREEN);
     }
 
-    public void switchToPedestrianTraffic() {
+    private void switchToPedestrianTraffic() {
         vehicleTrafficLightLeftLane.setLightStatus(ELightStatus.ORANGE);
         vehicleTrafficLightRightLane.setLightStatus(ELightStatus.ORANGE);
 
@@ -40,8 +45,8 @@ public class SingleTrafficLightSimulation {
         pedestrianTrafficLight1.setLightStatus(ELightStatus.GREEN);
         pedestrianTrafficLight2.setLightStatus(ELightStatus.GREEN);
     }
-
-    public void simulate(int steps) {
+    @Override
+    public void runSimulation(int steps) {
         for (int i = 0; i < steps; i++) {
             System.out.println("STEP: " + i + " (State: " + simulationStateNames[state] + ")");
 
@@ -78,5 +83,6 @@ public class SingleTrafficLightSimulation {
                 }
             }
         }
+
     }
 }

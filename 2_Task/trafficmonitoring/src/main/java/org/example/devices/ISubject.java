@@ -1,4 +1,4 @@
-package org.example;
+package org.example.devices;
 
 import org.example.observers.IObserver;
 

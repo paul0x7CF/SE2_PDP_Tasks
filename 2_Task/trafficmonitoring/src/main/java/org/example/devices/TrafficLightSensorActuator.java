@@ -1,6 +1,6 @@
-package org.example;
+package org.example.devices;
 
-class TrafficLightSensorActuator extends Device {
+public class TrafficLightSensorActuator extends Device {
     private ELightStatus lightStatus = ELightStatus.RED;
 
     public TrafficLightSensorActuator(String name) {

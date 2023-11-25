@@ -1,4 +1,4 @@
-package org.example;
+package org.example.devices;
 
 public class VehiclePresenceSensor extends Device {
     private boolean vehiclePresent = false;
