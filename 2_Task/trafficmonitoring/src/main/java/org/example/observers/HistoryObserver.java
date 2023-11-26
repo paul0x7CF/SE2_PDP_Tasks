@@ -9,7 +9,7 @@ public class HistoryObserver implements IObserver {
 
     @Override
     public void update(String notifyAbout) {
-        //logger.info(notifyAbout);
+        logger.info(notifyAbout);
 
     }
 }
