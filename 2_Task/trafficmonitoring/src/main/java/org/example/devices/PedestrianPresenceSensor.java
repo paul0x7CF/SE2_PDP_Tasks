@@ -15,4 +15,5 @@ public class PedestrianPresenceSensor extends Device {
     public boolean isPedestrianPresent() {
         return pedestrianPresent;
     }
+
 }

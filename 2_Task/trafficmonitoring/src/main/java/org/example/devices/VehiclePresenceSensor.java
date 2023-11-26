@@ -7,12 +7,12 @@ public class VehiclePresenceSensor extends Device {
         super(name);
     }
 
-    public boolean isVehiclePresent() {
-        return vehiclePresent;
-    }
-
     public void setVehiclePresent(boolean presence) {
         vehiclePresent = presence;
         notifyObservers("Vehicle presence detected: " + presence + " (Device: " + getName() + ")");
+    }
+
+    public boolean isVehiclePresent() {
+        return vehiclePresent;
     }
 }

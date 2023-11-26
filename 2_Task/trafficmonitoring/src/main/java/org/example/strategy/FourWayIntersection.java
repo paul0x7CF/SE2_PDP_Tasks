@@ -1,9 +1,6 @@
 package org.example.strategy;
 
-import org.example.devices.ELightStatus;
-import org.example.devices.PedestrianPresenceSensor;
-import org.example.devices.TrafficLightSensorActuator;
-import org.example.devices.VehiclePresenceSensor;
+import org.example.devices.*;
 
 public class FourWayIntersection implements ISimulationStrategy {
 
@@ -17,6 +14,7 @@ public class FourWayIntersection implements ISimulationStrategy {
     int state = VEHICLE_AND_PEDESTRIAN_TRAFFIC_HORIZONTAL;
     String[] simulationStateNames = {"Vehicle and Pedestrian Traffic Horizontal", "Vehicle and Pedestrian Traffic Vertical", "Vehicle Waiting Horizontal",
             "Pedestrian Waiting Horizontal", "Vehicle Waiting Vertical", "Pedestrian Waiting Vertical"};
+
 
     PedestrianPresenceSensor pedestrianSensorHorizontal = new PedestrianPresenceSensor("Pedestrian Present Horizontal");
     PedestrianPresenceSensor pedestrianSensorVertical = new PedestrianPresenceSensor("Pedestrian Present Vertical");
